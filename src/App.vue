@@ -1,13 +1,14 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+  <Layout></Layout>
 </template>
 
 <script>
+import Layout from './pages/Layout'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Layout,
+  },
 }
 </script>
 
@@ -19,5 +20,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  height: 100vh;
 }
 </style>
