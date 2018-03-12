@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 // apps
+import OverView from '../pages/apps/OverView'
 import Instance from '../pages/apps/instance/Instance'
-import OverView from '../pages/apps/overview/OverView'
 // 404
 import NotFound from '../pages/NotFound'
 

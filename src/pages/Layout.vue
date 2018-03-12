@@ -1,42 +1,44 @@
 <template>
-  <el-container class="container">
+  <el-container id="container">
     <el-header>
       <h1>
         <a href="/"></a>
       </h1>
-      <ul>-------------------未完成的HEADER</ul>
+      <ul>-------------------未完成的HEADER-------------------</ul>
     </el-header>
     <el-container>
       <el-aside>
-        <el-menu :default-active="activeMenu" class="menu" @open="handleOpen"
-          @close="handleClose" @select="handleSelect" background-color="#545c64"
-          text-color="#fff" active-text-color="#ffd04b">
-          <el-menu-item  index="overview">
-            <i class="el-icon-location"></i>{{$t('menu.overview')}}
-          </el-menu-item>
-          <el-submenu v-for="group of menu" :key="group.name" :index="group.name">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span slot="title">{{$t(`menu.${group.name}`)}}</span>
-            </template>
-            <el-menu-item v-for="submenu of group.submenu" :key="submenu"
-                :index="submenu">
-              <i class="el-icon-location"></i>{{$t(`menu.${submenu}`)}}
+        <el-scrollbar wrapClass="vScrollbar">
+          <el-menu :default-active="activeMenu" @open="handleOpen" :default-openeds="['computing']"
+            @close="handleClose" @select="handleSelect" background-color="#545c64"
+            text-color="#fff" active-text-color="#ffd04b">
+            <el-menu-item  index="overview">
+              {{$t('menu.overview')}}
             </el-menu-item>
-          </el-submenu>
-        </el-menu>
+            <el-submenu v-for="group of menu" :key="group.name" :index="group.name">
+              <template slot="title">
+                <span slot="title">{{$t(`menu.${group.name}`)}}</span>
+              </template>
+              <el-menu-item v-for="submenu of group.submenu" :key="submenu" :index="submenu">
+                <Iconfont :icon="submenu"/>{{$t(`menu.${submenu}`)}}
+              </el-menu-item>
+            </el-submenu>
+          </el-menu>
+        </el-scrollbar>
       </el-aside>
       <el-main>
-          <el-scrollbar>
-            <router-view/>
-          </el-scrollbar>
+        <el-scrollbar class="container" wrapClass="vScrollbar containerScrollbar">
+          <router-view/>
+        </el-scrollbar>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <style lang="less" scoped>
-.container {
+@import '../styles/variable.less';
+
+#container {
   height: 100vh;
   .el-header {
     background-color: #1d2b40;
@@ -58,8 +60,21 @@
     }
   }
   .el-aside {
-    background-color: #545c64;
-    overflow-y: auto;
+    background-color: @color_aside;
+    .el-scrollbar {
+      height: 100%;
+    }
+  }
+  .el-menu {
+    border: none;
+  }
+  .el-main {
+    padding: 0;
+    background-color: #F1F4F6;
+    .container {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>
@@ -69,16 +84,16 @@ export default {
   name: 'layout',
   data () {
     return {
-      app: 'apps/',
+      app: 'apps',
       menu: [{
         name: 'computing',
         submenu: ['instance', 'image', 'keypair'],
       }, {
         name: 'storage',
-        submenu: ['volume', 'object_storage', 'snapshot'],
+        submenu: ['volume', 'objectstorage', 'snapshot'],
       }, {
         name: 'security',
-        submenu: ['security_group'],
+        submenu: ['securitygroup'],
       }, {
         name: 'db_cache',
         submenu: ['database', 'cache'],
@@ -94,9 +109,7 @@ export default {
       console.log(key, keyPath)
     },
     handleSelect (key, keyPath) {
-      let app = this.$data.app
-      console.log(`/${app}${key}`)
-      this.$router.push(`/${app}${key}`)
+      this.$router.push(`/${this.$data.app}/${key}`)
     },
   },
 }
