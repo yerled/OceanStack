@@ -23,8 +23,7 @@ export default {
   computed: {
     icontype () {
       return `#icon-${this.icon}`
-    }
+    },
   },
 }
 </script>
-

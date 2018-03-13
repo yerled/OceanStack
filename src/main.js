@@ -1,27 +1,17 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import i18n from './i18n/i18n'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import './styles/index.less'
-import './components'
-import './filter'
-import '../static/iconfont/iconfont'
 import App from './App'
-import router from './router'
+import {router, i18n, store} from './lib'
 
-Vue.use(ElementUI, {
-  i18n: (key, value) => i18n.t(key, value),
-})
+import './styles/index.less'
 
 Vue.config.productionTip = false
-
-/* eslint-disable no-new */
-window.vm = new Vue({
+window.yerled = new Vue({
   el: '#app',
   router,
   i18n,
+  store,
   components: { App },
   template: '<App/>',
 })

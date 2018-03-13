@@ -24,7 +24,7 @@ export default {
 
   },
   mounted: function () {
-    console.log('mounted')
+
   },
   beforeDestory: function () {
     alert('beforDestroy')

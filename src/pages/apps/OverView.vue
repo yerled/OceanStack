@@ -3,7 +3,7 @@
     <!-- 欠费提示 -->
     <el-row v-if="balance < 0">
       <el-card class="tips" :body-style="tipstyle">
-        该项目的扣费账户［develop_test_user］已欠费，请充值或联系该项目支付者［develop_test_user］。
+        该项目的扣费账户［{{username}}］已欠费，请充值或联系该项目支付者［{{username}}］。
       </el-card>
     </el-row>
     <!-- 账户余额 -->
@@ -13,7 +13,7 @@
           <span>
             账户余额：<Money class="balance" :money="balance"/> 元
           </span>
-          <el-button style="padding: 0 80px 0 30px;" type="text">查询</el-button>
+          <el-button style="margin: 0 80px 0 30px;padding: 0;" type="text">查询</el-button>
           <span>
             当前账户消费预估：<Money :money="account_comsume_daily"/> 元/天
           </span>
@@ -163,6 +163,8 @@
 </style>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: 'overview',
   data () {
@@ -202,7 +204,9 @@ export default {
 
   },
   computed: {
-
+    ...mapState({
+      username: state => state.user.name,
+    }),
   },
   mounted: function () {
     /* eslint-disable */
