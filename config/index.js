@@ -9,6 +9,7 @@ let urls = [
   '/login',
   '/us/bill',
   '/us/manage',
+  '/os/network',
 ]
 let target = 'http://10.0.30.10:5555'
 let changeOrigin = true

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import plugins from './plugins'
+// modules
+import Setmeal from './modules/setmeal'
+import Port from './modules/port'
 
 Vue.use(Vuex)
 
@@ -22,6 +25,10 @@ const store = new Vuex.Store({
         state.lang = 'zh'
       }
     },
+  },
+  modules: {
+    Setmeal,
+    Port,
   },
 })
 

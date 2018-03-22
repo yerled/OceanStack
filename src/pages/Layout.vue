@@ -12,17 +12,21 @@
           <el-menu :default-active="activeMenu" @open="handleOpen" :default-openeds="['computing']"
             @close="handleClose" @select="handleSelect" background-color="#545c64"
             text-color="#fff" active-text-color="#ffd04b">
-            <el-menu-item  index="overview">
-              {{$t('menu.overview')}}
-            </el-menu-item>
-            <el-submenu v-for="group of menu" :key="group.name" :index="group.name">
-              <template slot="title">
-                <span slot="title">{{$t(`menu.${group.name}`)}}</span>
+            <template v-for="group of menu">
+              <template v-if="group.submenu">
+                <el-submenu :key="group.name" :index="group.name">
+                  <span slot="title">{{$t(`menu.${group.name}`)}}</span>
+                  <el-menu-item v-for="submenu of group.submenu" :key="submenu" :index="submenu">
+                    <Iconfont :icon="submenu"/>{{$t(`menu.${submenu}`)}}
+                  </el-menu-item>
+                </el-submenu>
               </template>
-              <el-menu-item v-for="submenu of group.submenu" :key="submenu" :index="submenu">
-                <Iconfont :icon="submenu"/>{{$t(`menu.${submenu}`)}}
-              </el-menu-item>
-            </el-submenu>
+              <template v-else>
+                <el-menu-item :key="group.name"  :index="group.name">
+                  {{$t(`menu.${group.name}`)}}
+                </el-menu-item>
+              </template>
+            </template>
           </el-menu>
         </el-scrollbar>
       </el-aside>
@@ -86,6 +90,10 @@ export default {
     return {
       app: 'apps',
       menu: [{
+        name: 'overview',
+      }, {
+        name: 'setmeal',
+      }, {
         name: 'computing',
         submenu: ['instance', 'image', 'keypair'],
       }, {
@@ -97,6 +105,8 @@ export default {
       }, {
         name: 'db_cache',
         submenu: ['database', 'cache'],
+      }, {
+        name: 'port',
       }],
       activeMenu: 'overview',
     }

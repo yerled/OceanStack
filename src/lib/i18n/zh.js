@@ -3,6 +3,7 @@ import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 const zh = {
   menu: {
     overview: '概览',
+    setmeal: '套餐包',
     computing: '计算',
     instance: '云主机',
     image: '镜像',
@@ -16,6 +17,7 @@ const zh = {
     db_cache: '数据库及缓存',
     database: '数据库',
     cache: '缓存',
+    port: '虚拟网卡',
   },
   resource: {
     instance: '云主机',
